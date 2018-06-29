@@ -1,19 +1,5 @@
-group 'pl.coffeepower.functional'
-version '1.0-SNAPSHOT'
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.7'
-    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
-}
-
-apply plugin: 'java'
-
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
-
-repositories {
-    mavenCentral()
-}
 
 dependencies {
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.16.22'

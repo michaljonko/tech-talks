@@ -1,0 +1,4 @@
+rootProject.name = 'tech-talks'
+
+include 'legacy'
+include 'yetanother'

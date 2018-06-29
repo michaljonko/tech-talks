@@ -1,0 +1,18 @@
+allprojects {
+    task wrapper(type: Wrapper) {
+        gradleVersion = '4.7'
+        distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+    }
+}
+
+subprojects {
+    group 'pl.coffeepower.functional'
+    version '1.0-SNAPSHOT'
+
+    apply plugin: 'java'
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+}
