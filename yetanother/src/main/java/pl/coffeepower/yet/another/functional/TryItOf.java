@@ -1,54 +1,42 @@
 package pl.coffeepower.yet.another.functional;
 
-import io.vavr.CheckedFunction1;
 import io.vavr.control.Try;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import lombok.NonNull;
 import lombok.extern.java.Log;
 
 @Log
 public final class TryItOf {
 
-  public static Set<Path> getHiddenPaths(Path rootPathToCheck) {
-    try {
-      try (Stream<Path> walk = Files.walk(rootPathToCheck)) {
-        return walk
-            .filter(path -> {
-              try {
-                return Files.isHidden(path);
-              } catch (IOException e) {
-                logException(e);
-              }
-              return false;
-            })
-            .collect(Collectors.collectingAndThen(Collectors.toSet(), Collections::unmodifiableSet));
-      }
-    } catch (IOException e) {
-      logException(e);
-    }
-    return Collections.emptySet();
+  private static void logException(Throwable throwable) {
+    log.severe(throwable.getMessage());
   }
 
-  public static Set<Path> getHiddenPathsFunctionalWay(Path rootPathToCheck) {
-    return Try
-        .withResources(() -> Files.walk(rootPathToCheck))
-        .of(CheckedFunction1.identity())
-        .onFailure(TryItOf::logException)
-        .getOrElse(Stream.empty())
-        .filter(path ->
-            Try
-                .of(() -> Files.isHidden(path))
-                .onFailure(TryItOf::logException)
-                .getOrElse(false))
+  public static Set<Path> getHiddenPaths(@NonNull Collection<Path> paths) {
+    return paths.stream()
+        .filter(path -> {
+          try {
+            return Files.isHidden(path);
+          } catch (IOException e) {
+            logException(e);
+          }
+          return false;
+        })
         .collect(Collectors.collectingAndThen(Collectors.toSet(), Collections::unmodifiableSet));
   }
 
-  private static void logException(Throwable throwable) {
-    log.severe(throwable.getMessage());
+  public static io.vavr.collection.Set<Path> getHiddenPaths(@NonNull io.vavr.collection.Seq<Path> paths) {
+    return paths
+        .filter(path ->
+            Try.of(() -> Files.isHidden(path))
+                .onFailure(TryItOf::logException)
+                .getOrElse(false))
+        .toSet();
   }
 }
