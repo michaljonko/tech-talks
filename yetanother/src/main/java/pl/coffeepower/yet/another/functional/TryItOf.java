@@ -12,13 +12,13 @@ import lombok.NonNull;
 import lombok.extern.java.Log;
 
 @Log
-public final class TryItOf {
+final class TryItOf {
 
   private static void logException(Throwable throwable) {
     log.severe(throwable.getMessage());
   }
 
-  public static Set<Path> getHiddenPaths(@NonNull Collection<Path> paths) {
+  static Set<Path> getHiddenPaths(@NonNull Collection<Path> paths) {
     return paths.stream()
         .filter(path -> {
           try {
@@ -31,7 +31,7 @@ public final class TryItOf {
         .collect(Collectors.collectingAndThen(Collectors.toSet(), Collections::unmodifiableSet));
   }
 
-  public static io.vavr.collection.Set<Path> getHiddenPaths(@NonNull io.vavr.collection.Seq<Path> paths) {
+  static io.vavr.collection.Set<Path> getHiddenPaths(@NonNull io.vavr.collection.Seq<Path> paths) {
     return paths
         .filter(path ->
             Try.of(() -> Files.isHidden(path))
