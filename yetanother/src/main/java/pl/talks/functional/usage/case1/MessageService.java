@@ -1,9 +1,9 @@
 package pl.talks.functional.usage.case1;
 
 public enum MessageService {
-    INSTANCE;
+  INSTANCE;
 
-    public void sendMessage(AuditMessage message) {
+  public void sendMessage(AuditMessage message) {
 
-    }
+  }
 }
