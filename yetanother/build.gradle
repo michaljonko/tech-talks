@@ -1,7 +1,10 @@
 apply plugin: 'groovy'
+apply plugin: 'application'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
+
+mainClassName = 'pl.coffeepower.yet.another.functional.Main'
 
 dependencies {
     compile group: 'io.vavr', name: 'vavr', version: '0.9.2'

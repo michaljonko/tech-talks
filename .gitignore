@@ -66,3 +66,6 @@ buildNumber.properties
 !/.mvn/wrapper/maven-wrapper.jar
 
 tech-talks.iml
+
+/yetanother/build/
+/yetanother/out/
