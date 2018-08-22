@@ -1,4 +1,4 @@
-package pl.talks.functional.usage.case3;
+package pl.talks.functional.usage.case3.stub;
 
 public interface Handler {
     void handleMessage(ResourceA ticketDeltaMessage);

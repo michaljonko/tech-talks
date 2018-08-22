@@ -2,7 +2,7 @@ package pl.talks.functional.usage.case3;
 
 import io.micrometer.core.instrument.MeterRegistry;
 import lombok.extern.java.Log;
-import lombok.extern.slf4j.Slf4j;
+import pl.talks.functional.usage.case3.stub.*;
 
 @Log
 public class ResourceAHandlerOld implements Handler {
