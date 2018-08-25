@@ -8,10 +8,13 @@ allprojects {
 }
 
 subprojects {
-    group 'pl.coffeepower.functional'
+    group 'pl.org.jdd'
     version '1.0-SNAPSHOT'
 
     apply plugin: 'java'
+
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 
     repositories {
         mavenCentral()
@@ -20,9 +23,37 @@ subprojects {
 
     dependencies {
         compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.16.22'
-        annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.16.22'
+        compileOnly group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+
+        runtimeOnly group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
 
         testCompile group: 'junit', name: 'junit', version: '4.12'
         testCompile group: 'org.mockito', name: 'mockito-core', version: '2.19.1'
+
+        annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.16.22'
+    }
+}
+
+project(':legacy') {
+
+    dependencies {
+        compile group: 'org.springframework', name: 'spring-tx', version: '4.2.6.RELEASE'
+        compile group: 'io.micrometer', name: 'micrometer-core', version: '1.0.6'
+    }
+}
+
+project(':case1-option') {
+
+//    apply plugin: 'groovy'
+
+    dependencies {
+        compile project(':legacy')
+        compile group: 'io.vavr', name: 'vavr', version: '0.9.2'
+
+//        testCompile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.15'
+//        testCompile group: 'org.spockframework', name: 'spock-core', version: '1.1-groovy-2.4'
+
+        annotationProcessor group: 'io.vavr', name: 'vavr', version: '0.9.2'
+        testAnnotationProcessor group: 'io.vavr', name: 'vavr', version: '0.9.2'
     }
 }
