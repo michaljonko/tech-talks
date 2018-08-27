@@ -1,5 +1,5 @@
 package pl.org.jdd.legacy.stub;
 
-public class Engineer {
+public interface Souvenir {
 
 }
