@@ -3,7 +3,7 @@ package pl.org.jdd.legacy.stub;
 /**
  * The place in which Tola stores valuable souvenires
  */
-public class Treasury {
+public final class Treasury {
 
   public Location put(SouvenirRequestMessage souvenirMessage) {
     return null;

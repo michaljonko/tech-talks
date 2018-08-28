@@ -1,16 +1,16 @@
 package pl.org.jdd.legacy;
 
 import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.Metrics;
 import lombok.extern.slf4j.Slf4j;
-import pl.org.jdd.legacy.stub.SouvenirRequestMessage;
 import pl.org.jdd.legacy.stub.Diamond;
 import pl.org.jdd.legacy.stub.DiamondMessageConverter;
-import pl.org.jdd.legacy.stub.Treasury;
 import pl.org.jdd.legacy.stub.DiamondValidator;
-import pl.org.jdd.legacy.stub.Handler;
+import pl.org.jdd.legacy.stub.SouvenirRequestMessage;
+import pl.org.jdd.legacy.stub.Treasury;
 
 @Slf4j
-public class DiamondsHandler implements Handler {
+public final class DiamondsHandler implements Handler<Diamond> {
 
   private final DiamondMessageConverter converter;
   private final Treasury treasury;
@@ -26,6 +26,10 @@ public class DiamondsHandler implements Handler {
     this.converter = converter;
     this.validator = validator;
     this.meterRegistry = meterRegistry;
+  }
+
+  public static DiamondsHandler create() {
+    return new DiamondsHandler(new Treasury(), new DiamondMessageConverter(), new DiamondValidator(), Metrics.globalRegistry);
   }
 
   @Override

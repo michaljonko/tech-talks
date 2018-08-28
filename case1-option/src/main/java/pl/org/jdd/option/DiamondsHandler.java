@@ -7,10 +7,10 @@ import pl.org.jdd.legacy.stub.Diamond;
 import pl.org.jdd.legacy.stub.DiamondMessageConverter;
 import pl.org.jdd.legacy.stub.Treasury;
 import pl.org.jdd.legacy.stub.DiamondValidator;
-import pl.org.jdd.legacy.stub.Handler;
+import pl.org.jdd.legacy.Handler;
 
 @Slf4j
-public class DiamondsHandler implements Handler {
+public final class DiamondsHandler implements Handler<Diamond> {
 
   private final DiamondMessageConverter converter;
   private final Treasury treasury;

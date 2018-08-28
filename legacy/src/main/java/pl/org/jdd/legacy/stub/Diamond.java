@@ -1,5 +1,5 @@
 package pl.org.jdd.legacy.stub;
 
-public class Diamond implements Souvenir {
+public final class Diamond implements Souvenir {
 
 }
