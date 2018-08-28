@@ -1,4 +1,5 @@
 rootProject.name = 'tech-talks'
 
 include 'legacy',
-        'case1-option'
+        'case1-option',
+        'case2-chain'

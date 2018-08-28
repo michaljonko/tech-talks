@@ -3,9 +3,9 @@ package pl.org.jdd.legacy;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Metrics;
 import lombok.extern.slf4j.Slf4j;
-import pl.org.jdd.legacy.stub.Diamond;
-import pl.org.jdd.legacy.stub.DiamondMessageConverter;
-import pl.org.jdd.legacy.stub.DiamondValidator;
+import pl.org.jdd.legacy.stub.diamond.Diamond;
+import pl.org.jdd.legacy.stub.diamond.DiamondMessageConverter;
+import pl.org.jdd.legacy.stub.diamond.DiamondValidator;
 import pl.org.jdd.legacy.stub.SouvenirRequestMessage;
 import pl.org.jdd.legacy.stub.Treasury;
 

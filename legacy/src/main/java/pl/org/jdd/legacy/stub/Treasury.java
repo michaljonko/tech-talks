@@ -1,7 +1,7 @@
 package pl.org.jdd.legacy.stub;
 
 /**
- * The place in which Tola stores valuable souvenires
+ * The place in which Tola stores valuable souvenirs
  */
 public final class Treasury {
 
@@ -9,7 +9,7 @@ public final class Treasury {
     return null;
   }
 
-  public static class Location {
+  public static final class Location {
 
   }
 }

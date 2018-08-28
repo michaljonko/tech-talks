@@ -1,4 +1,4 @@
-package pl.org.jdd.legacy.stub;
+package pl.org.jdd.legacy.stub.diamond;
 
 public final class DiamondValidator {
 

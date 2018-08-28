@@ -2,7 +2,7 @@ package pl.org.jdd.legacy;
 
 import com.google.common.collect.ImmutableMap;
 import java.util.Map;
-import pl.org.jdd.legacy.stub.Diamond;
+import pl.org.jdd.legacy.stub.diamond.Diamond;
 import pl.org.jdd.legacy.stub.Souvenir;
 
 public final class SouvenirDispatcher {
