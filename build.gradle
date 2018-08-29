@@ -35,7 +35,6 @@ subprojects {
 }
 
 project(':legacy') {
-
     dependencies {
         compile group: 'org.springframework', name: 'spring-tx', version: '4.2.6.RELEASE'
         compile group: 'io.micrometer', name: 'micrometer-core', version: '1.0.6'
@@ -44,23 +43,41 @@ project(':legacy') {
 }
 
 project(':case1-option') {
-
     dependencies {
         compile project(':legacy')
         compile group: 'io.vavr', name: 'vavr', version: '0.9.2'
 
-        annotationProcessor group: 'io.vavr', name: 'vavr', version: '0.9.2'
-        testAnnotationProcessor group: 'io.vavr', name: 'vavr', version: '0.9.2'
+        annotationProcessor group: 'io.vavr', name: 'vavr-match', version: '0.9.2'
+        testAnnotationProcessor group: 'io.vavr', name: 'vavr-match', version: '0.9.2'
     }
 }
 
 project(':case2-chain') {
+    dependencies {
+        compile project(':case1-option')
+        compile group: 'io.vavr', name: 'vavr', version: '0.9.2'
 
+        annotationProcessor group: 'io.vavr', name: 'vavr-match', version: '0.9.2'
+        testAnnotationProcessor group: 'io.vavr', name: 'vavr-match', version: '0.9.2'
+    }
+}
+
+project(':case3-either') {
     dependencies {
         compile project(':legacy')
         compile group: 'io.vavr', name: 'vavr', version: '0.9.2'
 
-        annotationProcessor group: 'io.vavr', name: 'vavr', version: '0.9.2'
-        testAnnotationProcessor group: 'io.vavr', name: 'vavr', version: '0.9.2'
+        annotationProcessor group: 'io.vavr', name: 'vavr-match', version: '0.9.2'
+        testAnnotationProcessor group: 'io.vavr', name: 'vavr-match', version: '0.9.2'
+    }
+}
+
+project(':case4-try') {
+    dependencies {
+        compile project(':legacy')
+        compile group: 'io.vavr', name: 'vavr', version: '0.9.2'
+
+        annotationProcessor group: 'io.vavr', name: 'vavr-match', version: '0.9.2'
+        testAnnotationProcessor group: 'io.vavr', name: 'vavr-match', version: '0.9.2'
     }
 }
