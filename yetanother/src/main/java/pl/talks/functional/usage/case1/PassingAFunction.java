@@ -20,7 +20,7 @@ public class PassingAFunction {
   public static void audit(UserActivity userActivity, Function1<UserActivity, Optional<AuditMessage>>... producers) {
     for (Function1<UserActivity, Optional<AuditMessage>> producer : producers) {
       producer.apply(userActivity)
-          .ifPresent(auditMessage -> MessageService.INSTANCE.sendMessage(auditMessage));
+          .ifPresent(MessageService.INSTANCE::sendMessage);
     }
   }
 

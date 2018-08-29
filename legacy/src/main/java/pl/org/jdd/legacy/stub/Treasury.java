@@ -9,7 +9,4 @@ public final class Treasury {
     return null;
   }
 
-  public static final class Location {
-
-  }
 }

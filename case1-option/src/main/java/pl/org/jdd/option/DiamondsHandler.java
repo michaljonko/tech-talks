@@ -3,11 +3,11 @@ package pl.org.jdd.option;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.vavr.control.Option;
 import lombok.extern.slf4j.Slf4j;
+import pl.org.jdd.legacy.stub.Location;
+import pl.org.jdd.legacy.stub.Treasury;
 import pl.org.jdd.legacy.stub.diamond.Diamond;
 import pl.org.jdd.legacy.stub.diamond.DiamondMessageConverter;
-import pl.org.jdd.legacy.stub.Treasury;
 import pl.org.jdd.legacy.stub.diamond.DiamondValidator;
-import pl.org.jdd.legacy.Handler;
 
 @Slf4j
 public final class DiamondsHandler implements Handler<Diamond> {
@@ -29,8 +29,8 @@ public final class DiamondsHandler implements Handler<Diamond> {
   }
 
   @Override
-  public void handleSouvenir(Diamond diamond) {
-    Option.of(diamond)
+  public Option<Location> handleSouvenir(Diamond diamond) {
+    return Option.of(diamond)
         .filter(validator::isValid)
         .onEmpty(() -> {
           log.info("Invalid Diamond.");
@@ -38,6 +38,7 @@ public final class DiamondsHandler implements Handler<Diamond> {
         })
         .peek(eng -> meterRegistry.counter("messages.diamonds").increment())
         .map(converter::convert)
-        .forEach(treasury::put);
+        .map(treasury::put)
+        .toOption();
   }
 }
