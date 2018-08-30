@@ -25,10 +25,11 @@ public class ValidateJewelleryFunction implements Function1<Jewellery, Either<Th
   @Override
   public Either<Throwable, Jewellery> apply(Jewellery jewellery) {
     if (validator.isValid(jewellery)) {
-      log.error("Invalid Jewellery.");
-      meterRegistry.counter("jewellery.invalid.counter").increment();
+      log.info("Valid Jewellery.");
       return Either.right(jewellery);
     } else {
+      log.info("Invalid Jewellery.");
+      meterRegistry.counter("jewellery.invalid.counter").increment();
       return Either.left(new NotValuableSouvenirException("Not valid jewellery."));
     }
   }

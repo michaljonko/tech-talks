@@ -24,10 +24,10 @@ public class ValidateJewelleryFunction implements Function1<Jewellery, Option<Je
   @Override
   public Option<Jewellery> apply(Jewellery jewellery) {
     if (diamondValidator.isValid(jewellery)) {
-      log.info("Invalid Jewellery");
-      meterRegistry.counter("jewellery.invalid.counter").increment();
       return Option.of(jewellery);
     } else {
+      log.info("Invalid Jewellery");
+      meterRegistry.counter("jewellery.invalid.counter").increment();
       return Option.none();
     }
   }
