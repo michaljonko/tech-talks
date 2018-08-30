@@ -37,7 +37,7 @@ public final class DiamondsHandler implements Handler<Diamond, Location> {
           meterRegistry.counter("messages.invalid.data").increment();
         })
         .peek(eng -> meterRegistry.counter("messages.diamonds").increment())
-        .map(converter::convert)
+        .map(converter::pack)
         .map(treasury::put)
         .toOption();
   }

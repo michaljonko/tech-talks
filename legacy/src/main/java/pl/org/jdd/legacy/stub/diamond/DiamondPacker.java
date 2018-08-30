@@ -4,7 +4,7 @@ import pl.org.jdd.legacy.stub.PackageSouvenir;
 
 public final class DiamondPacker {
 
-  public PackageSouvenir convert(Diamond diamond) {
+  public PackageSouvenir pack(Diamond diamond) {
     return null;
   }
 }

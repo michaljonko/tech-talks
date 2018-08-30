@@ -22,7 +22,7 @@ public class PutSouvenirToTreasuryFunction implements Function1<Option<Diamond>,
 
     @Override
     public Option<Location> apply(Option<Diamond> souvenir) {
-        return souvenir.map(converter::convert)
+        return souvenir.map(converter::pack)
                 .map(treasury::put);
     }
 }

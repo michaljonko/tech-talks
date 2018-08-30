@@ -36,7 +36,7 @@ public final class DiamondsHandler implements Handler<Diamond> {
   public void handleSouvenir(Diamond diamond) {
     if (validator.isValid(diamond)) {
       meterRegistry.counter("messages.diamonds").increment();
-      PackageSouvenir requestMessage = converter.convert(diamond);
+      PackageSouvenir requestMessage = converter.pack(diamond);
       treasury.put(requestMessage);
     } else {
       log.info("Invalid Diamond");
