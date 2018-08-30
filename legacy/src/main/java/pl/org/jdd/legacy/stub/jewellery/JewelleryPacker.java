@@ -6,7 +6,7 @@ import pl.org.jdd.legacy.stub.SouvenirPackage;
 
 public final class JewelleryPacker {
 
-  public SouvenirPackage convert(Jewellery jewellery) {
+  public SouvenirPackage pack(Jewellery jewellery) {
     return nonNull(jewellery) ? new SouvenirPackage() : null;
   }
 }

@@ -44,7 +44,7 @@ public final class JewelleryHandler implements Handler<Jewellery, Location> {
           meterRegistry.counter("jewellery.invalid.counter").increment();
         })
         .peek(j -> meterRegistry.counter("jewellery.counter").increment())
-        .map(packer::convert)
+        .map(packer::pack)
         .map(treasury::put)
         .toOption();
   }
