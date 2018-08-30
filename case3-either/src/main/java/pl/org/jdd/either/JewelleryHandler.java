@@ -2,6 +2,7 @@ package pl.org.jdd.either;
 
 import io.micrometer.core.instrument.MeterRegistry;
 import io.vavr.Function1;
+import io.vavr.collection.List;
 import io.vavr.control.Either;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -34,8 +35,21 @@ public final class JewelleryHandler implements Handler<Jewellery, Location> {
   @Override
   public Either<Throwable, Location> handleSouvenir(Jewellery jewellery) {
     // TODO: 30.08.2018 taki szybki pomysl na either'a bez chintoola. jak nic nie znajdziemy to zeby bylo ladnie i czytelnie to chyba to zostawimy
+//    List<Function1> functions = List
+//        .of(validateFunction, reportFunction, putToTreasuryFunction);
+//    Either startingPoint = (Either) functions.head().apply(jewellery);
+//    List<Function1> functionsTail = functions.tail();
+//    return (Either<Throwable, Location>) chain(startingPoint, functionsTail);
     return validateFunction.apply(jewellery)
         .flatMap(reportFunction)
         .flatMap(putToTreasuryFunction);
+  }
+
+  private Either chain(Either either, List<Function1> functions) {
+    if (functions.nonEmpty()) {
+      Either newEither = either.flatMap(functions.head());
+      return chain(newEither, functions.tail());
+    }
+    return either;
   }
 }
