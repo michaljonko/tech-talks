@@ -6,7 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import pl.org.jdd.chain.functions.PutJewelleryToTreasuryFunction;
 import pl.org.jdd.chain.functions.ReportJewelleryFunction;
 import pl.org.jdd.chain.functions.ValidateJewelleryFunction;
-import pl.org.jdd.chain.tool.ChainInvoker;
 import pl.org.jdd.legacy.stub.Location;
 import pl.org.jdd.legacy.stub.jewellery.Jewellery;
 import pl.org.jdd.option.Handler;

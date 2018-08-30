@@ -5,7 +5,7 @@ import io.vavr.Function1;
 import io.vavr.control.Either;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import pl.org.jdd.either.exception.TolaSystemException;
+import pl.org.jdd.either.exception.NotValuableSouvenirException;
 import pl.org.jdd.legacy.stub.jewellery.Jewellery;
 import pl.org.jdd.legacy.stub.jewellery.JewelleryValidator;
 
@@ -29,7 +29,7 @@ public class ValidateJewelleryFunction implements Function1<Jewellery, Either<Th
       meterRegistry.counter("jewellery.invalid.counter").increment();
       return Either.right(jewellery);
     } else {
-      return Either.left(new TolaSystemException("Problem with validation"));
+      return Either.left(new NotValuableSouvenirException("Not valid jewellery."));
     }
   }
 }

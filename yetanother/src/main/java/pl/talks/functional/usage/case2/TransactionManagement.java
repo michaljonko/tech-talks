@@ -4,21 +4,22 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 public class TransactionManagement {
 
-    TransactionTemplate transactionTemplate;
+  TransactionTemplate transactionTemplate;
 
-    public void howYouCanManageTransactionViaFunctionalWay() {
-        transactionTemplate.execute(transactionStatus -> {
-            // some logic here
-            thisLogicIsInvokeInNewTransaction();
-            // more logic
-            return new SomeResult();
-        });
-    }
+  public void howYouCanManageTransactionViaFunctionalWay() {
+    transactionTemplate.execute(transactionStatus -> {
+      // some logic here
+      thisLogicIsInvokeInNewTransaction();
+      // more logic
+      return new SomeResult();
+    });
+  }
 
-    private void thisLogicIsInvokeInNewTransaction() {
-        transactionTemplate.execute(transactionStatus -> 42);
-    }
+  private void thisLogicIsInvokeInNewTransaction() {
+    transactionTemplate.execute(transactionStatus -> 42);
+  }
 
-    private class SomeResult {
-    }
+  private class SomeResult {
+
+  }
 }
