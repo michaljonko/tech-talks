@@ -3,7 +3,6 @@ package pl.org.jdd.legacy.stub;
 import lombok.Value;
 
 @Value
-public final class Location {
+public final class SouvenirPackage {
 
-  String direction;
 }

@@ -5,8 +5,7 @@ package pl.org.jdd.legacy.stub;
  */
 public final class Treasury {
 
-  public Location put(PackageSouvenir souvenirMessage) {
+  public Location put(SouvenirPackage souvenirPackage) {
     return null;
   }
-
 }
