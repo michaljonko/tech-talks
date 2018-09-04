@@ -6,7 +6,7 @@ import io.vavr.control.Option;
 import lombok.NonNull;
 import pl.org.jdd.legacy.stub.jewellery.Jewellery;
 
-public class ReportJewelleryFunction implements Function1<Option<Jewellery>, Option<Jewellery>> {
+public final class ReportJewelleryFunction implements Function1<Option<Jewellery>, Option<Jewellery>> {
 
   private final MeterRegistry meterRegistry;
 

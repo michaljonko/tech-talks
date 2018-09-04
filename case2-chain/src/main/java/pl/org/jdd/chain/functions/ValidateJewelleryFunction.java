@@ -9,7 +9,7 @@ import pl.org.jdd.legacy.stub.jewellery.Jewellery;
 import pl.org.jdd.legacy.stub.jewellery.JewelleryValidator;
 
 @Slf4j
-public class ValidateJewelleryFunction implements Function1<Jewellery, Option<Jewellery>> {
+public final class ValidateJewelleryFunction implements Function1<Jewellery, Option<Jewellery>> {
 
   private final MeterRegistry meterRegistry;
   private final JewelleryValidator diamondValidator;
@@ -26,7 +26,7 @@ public class ValidateJewelleryFunction implements Function1<Jewellery, Option<Je
     if (diamondValidator.isValid(jewellery)) {
       return Option.of(jewellery);
     } else {
-      log.info("Invalid Jewellery");
+      log.info("Invalid Jewellery: {}", jewellery);
       meterRegistry.counter("jewellery.invalid.counter").increment();
       return Option.none();
     }

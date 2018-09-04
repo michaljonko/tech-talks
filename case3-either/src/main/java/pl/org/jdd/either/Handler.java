@@ -6,5 +6,5 @@ import pl.org.jdd.legacy.stub.Souvenir;
 
 public interface Handler<I extends Souvenir, O extends Location> {
 
-  Either<Throwable, O> handleSouvenir(I souvenir);
+  Either<? extends Throwable, O> handleSouvenir(I souvenir);
 }

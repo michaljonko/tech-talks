@@ -2,13 +2,16 @@ package pl.org.jdd.chain.tool;
 
 import io.vavr.Function1;
 import io.vavr.collection.List;
-import pl.org.jdd.legacy.stub.Souvenir;
 
-public class ChainInvoker {
+public final class ChainInvoker {
 
-  public static <R> R invokeChain(Souvenir souvenir, Function1... functions) {
-    return (R) List.of(functions)
-        .reduceLeft(Function1::andThen)
-        .apply(souvenir);
+  private ChainInvoker() {
+    throw new UnsupportedOperationException();
+  }
+
+  @SuppressWarnings("unchecked")
+  public static <I, O> O invoke(I input, Function1... functions) {
+    Function1<I, O> composedFunction = List.of(functions).reduceLeft(Function1::andThen);
+    return composedFunction.apply(input);
   }
 }

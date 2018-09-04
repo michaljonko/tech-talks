@@ -25,4 +25,11 @@ public class JewelleryHandlerTest {
 
     assert souvenir.isEmpty();
   }
+
+  @Test
+  public void diamondsAreValidSouvenirForTola() throws Exception {
+    Option<Location> souvenir = handler.handleSouvenir(new Jewellery("diamonds"));
+
+    assert !souvenir.isEmpty();
+  }
 }

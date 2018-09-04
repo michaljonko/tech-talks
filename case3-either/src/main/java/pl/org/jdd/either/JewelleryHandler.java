@@ -2,13 +2,13 @@ package pl.org.jdd.either;
 
 import io.micrometer.core.instrument.MeterRegistry;
 import io.vavr.Function1;
-import io.vavr.collection.List;
 import io.vavr.control.Either;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import pl.org.jdd.either.functions.PutJewelleryToTreasuryFunction;
 import pl.org.jdd.either.functions.ReportJewelleryFunction;
 import pl.org.jdd.either.functions.ValidateJewelleryFunction;
+import pl.org.jdd.either.tool.ChainInvoker;
 import pl.org.jdd.legacy.stub.Location;
 import pl.org.jdd.legacy.stub.Treasury;
 import pl.org.jdd.legacy.stub.jewellery.Jewellery;
@@ -18,9 +18,9 @@ import pl.org.jdd.legacy.stub.jewellery.JewelleryValidator;
 @Slf4j
 public final class JewelleryHandler implements Handler<Jewellery, Location> {
 
-  private final Function1<Jewellery, Either<Throwable, Jewellery>> validateFunction;
-  private final Function1<Jewellery, Either<Throwable, Jewellery>> reportFunction;
-  private final Function1<Jewellery, Either<Throwable, Location>> putToTreasuryFunction;
+  private final Function1<Jewellery, Either<? extends Throwable, Jewellery>> validateFunction;
+  private final Function1<Jewellery, Either<? extends Throwable, Jewellery>> reportFunction;
+  private final Function1<Jewellery, Either<? extends Throwable, Location>> putToTreasuryFunction;
 
   public JewelleryHandler(
       @NonNull JewelleryValidator validator,
@@ -33,23 +33,7 @@ public final class JewelleryHandler implements Handler<Jewellery, Location> {
   }
 
   @Override
-  public Either<Throwable, Location> handleSouvenir(Jewellery jewellery) {
-    // TODO: 30.08.2018 taki szybki pomysl na either'a bez chintoola. jak nic nie znajdziemy to zeby bylo ladnie i czytelnie to chyba to zostawimy
-//    List<Function1> functions = List
-//        .of(validateFunction, reportFunction, putToTreasuryFunction);
-//    Either startingPoint = (Either) functions.head().apply(jewellery);
-//    List<Function1> functionsTail = functions.tail();
-//    return (Either<Throwable, Location>) chain(startingPoint, functionsTail);
-    return validateFunction.apply(jewellery)
-        .flatMap(reportFunction)
-        .flatMap(putToTreasuryFunction);
-  }
-
-  private Either chain(Either either, List<Function1> functions) {
-    if (functions.nonEmpty()) {
-      Either newEither = either.flatMap(functions.head());
-      return chain(newEither, functions.tail());
-    }
-    return either;
+  public Either<? extends Throwable, Location> handleSouvenir(Jewellery jewellery) {
+    return ChainInvoker.chain(jewellery, validateFunction, reportFunction, putToTreasuryFunction);
   }
 }

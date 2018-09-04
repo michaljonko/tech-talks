@@ -30,7 +30,8 @@ public final class JewelleryHandler implements Handler<Jewellery> {
   }
 
   public static JewelleryHandler create() {
-    return new JewelleryHandler(new JewelleryValidator(), new JewelleryPacker(), new Treasury(), Metrics.globalRegistry);
+    return new JewelleryHandler(new JewelleryValidator(), new JewelleryPacker(), new Treasury(),
+        Metrics.globalRegistry);
   }
 
   @Override

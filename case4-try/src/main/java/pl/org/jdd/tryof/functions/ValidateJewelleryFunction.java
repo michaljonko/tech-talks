@@ -1,8 +1,7 @@
-package pl.org.jdd.either.functions;
+package pl.org.jdd.tryof.functions;
 
 import io.micrometer.core.instrument.MeterRegistry;
 import io.vavr.Function1;
-import io.vavr.control.Either;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import pl.org.jdd.either.exception.NotValuableSouvenirException;
@@ -10,7 +9,7 @@ import pl.org.jdd.legacy.stub.jewellery.Jewellery;
 import pl.org.jdd.legacy.stub.jewellery.JewelleryValidator;
 
 @Slf4j
-public class ValidateJewelleryFunction implements Function1<Jewellery, Either<? extends Throwable, Jewellery>> {
+public class ValidateJewelleryFunction implements Function1<Jewellery, Jewellery> {
 
   private final MeterRegistry meterRegistry;
   private final JewelleryValidator validator;
@@ -23,14 +22,14 @@ public class ValidateJewelleryFunction implements Function1<Jewellery, Either<? 
   }
 
   @Override
-  public Either<? extends Throwable, Jewellery> apply(Jewellery jewellery) {
+  public Jewellery apply(Jewellery jewellery) {
     if (validator.isValid(jewellery)) {
       log.info("Valid Jewellery.");
-      return Either.right(jewellery);
+      return jewellery;
     } else {
       log.info("Invalid Jewellery.");
       meterRegistry.counter("jewellery.invalid.counter").increment();
-      return Either.left(new NotValuableSouvenirException("Not valid jewellery."));
+      throw new NotValuableSouvenirException("Not valid jewellery.");
     }
   }
 }
