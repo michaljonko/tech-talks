@@ -6,7 +6,7 @@ import lombok.ToString;
 import pl.org.jdd.legacy.stub.Souvenir;
 
 @Getter
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode
 @ToString
 public final class NotValuableItem extends SomethingWrong {
 
