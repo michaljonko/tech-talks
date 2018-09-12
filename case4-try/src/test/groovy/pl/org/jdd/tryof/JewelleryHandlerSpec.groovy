@@ -20,14 +20,12 @@ class JewelleryHandlerSpec extends Specification {
         def packer = new JewelleryPacker()
         def treasury = new Treasury()
         def meterRegistry = Metrics.globalRegistry
-
-        when:
         def handler = new JewelleryHandler(validator, packer, treasury, meterRegistry)
 
-        then:
+        when:
         def either = handler.handleSouvenir(jewellery)
 
-        expect:
+        then:
         either == expectedEither
 
         where:
