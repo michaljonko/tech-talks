@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import pl.org.jdd.legacy.stub.jewellery.Jewellery;
 
 @Slf4j
-public class ReportJewelleryFunction implements Function1<Jewellery, Either<? extends Throwable, Jewellery>> {
+public final class ReportJewelleryFunction implements Function1<Jewellery, Either<? extends Throwable, Jewellery>> {
 
   private final MeterRegistry meterRegistry;
 

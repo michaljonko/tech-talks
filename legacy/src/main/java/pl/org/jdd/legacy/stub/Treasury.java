@@ -6,6 +6,6 @@ package pl.org.jdd.legacy.stub;
 public final class Treasury {
 
   public Location put(SouvenirPackage souvenirPackage) {
-    return new Location("Black hole");
+    return new Location("safe behind the picture");
   }
 }

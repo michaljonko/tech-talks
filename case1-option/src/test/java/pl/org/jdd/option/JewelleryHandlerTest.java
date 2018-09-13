@@ -16,15 +16,17 @@ public class JewelleryHandlerTest {
 
   @Test
   public void topazIsNotAJewelleryForTola() throws Exception {
-    Option<Location> locations = handler.handleSouvenir(new Jewellery("topaz"));
+    Option<Location> location = handler.handleSouvenir(new Jewellery("topaz"));
 
-    assert locations.isEmpty();
+    assert location.isEmpty();
   }
 
   @Test
-  public void diamondsAreLovedByTola() throws Exception {
-    Option<Location> locations = handler.handleSouvenir(new Jewellery("diamonds"));
+  public void diamondsAreLovedByTolaAndPackedInSafe() throws Exception {
+    Location expectedLocation = new Location("safe behind the picture");
 
-    assert !locations.isEmpty();
+    Option<Location> location = handler.handleSouvenir(new Jewellery("diamonds"));
+
+    assert location.get().equals(expectedLocation);
   }
 }

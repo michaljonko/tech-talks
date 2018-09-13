@@ -7,7 +7,8 @@ import pl.org.jdd.legacy.stub.Treasury
 import pl.org.jdd.legacy.stub.jewellery.Jewellery
 import pl.org.jdd.legacy.stub.jewellery.JewelleryPacker
 import pl.org.jdd.legacy.stub.jewellery.JewelleryValidator
-import pl.org.jdd.tryof.failure.NotValuableItem
+import pl.org.jdd.tryof.failure.ConstraintTypes
+import pl.org.jdd.tryof.failure.Failure
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -30,9 +31,8 @@ class JewelleryHandlerSpec extends Specification {
 
         where:
         jewellery                 || expectedEither
-        new Jewellery("topaz")    || Either.left(new NotValuableItem(jewellery))
-        new Jewellery("gold")     || Either.left(new NotValuableItem(jewellery))
-        new Jewellery("diamonds") || Either.right(new Location("Black hole"))
-
+        new Jewellery("topaz")    || Either.left(Failure.create(ConstraintTypes.NOT_VALUABLE_SOUVENIR))
+        null                      || Either.left(Failure.create(ConstraintTypes.SOMETHING_IS_NOT_DEFINED))
+        new Jewellery("diamonds") || Either.right(new Location("safe behind the picture"))
     }
 }

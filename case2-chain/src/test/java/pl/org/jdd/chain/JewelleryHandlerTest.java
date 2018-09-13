@@ -16,20 +16,23 @@ public class JewelleryHandlerTest {
 
   private final JewelleryHandler handler = new JewelleryHandler(
       new ValidateJewelleryFunction(new JewelleryValidator(), Metrics.globalRegistry),
-      new PutJewelleryToTreasuryFunction(new JewelleryPacker(), new Treasury()),
-      new ReportJewelleryFunction(Metrics.globalRegistry));
+      new ReportJewelleryFunction(Metrics.globalRegistry),
+      new PutJewelleryToTreasuryFunction(new JewelleryPacker(), new Treasury())
+  );
 
   @Test
   public void topazIsNotValidSouvenirForTola() throws Exception {
-    Option<Location> souvenir = handler.handleSouvenir(new Jewellery("topaz"));
+    Option<Location> location = handler.handleSouvenir(new Jewellery("topaz"));
 
-    assert souvenir.isEmpty();
+    assert location.isEmpty();
   }
 
   @Test
-  public void diamondsAreValidSouvenirForTola() throws Exception {
-    Option<Location> souvenir = handler.handleSouvenir(new Jewellery("diamonds"));
+  public void goldIsPackedInSafe() throws Exception {
+    Location expectedLocation = new Location("safe behind the picture");
 
-    assert !souvenir.isEmpty();
+    Option<Location> location = handler.handleSouvenir(new Jewellery("gold"));
+
+    assert location.get().equals(expectedLocation);
   }
 }

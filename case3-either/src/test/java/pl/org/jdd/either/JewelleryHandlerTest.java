@@ -2,7 +2,6 @@ package pl.org.jdd.either;
 
 import io.micrometer.core.instrument.Metrics;
 import io.vavr.control.Either;
-import java.util.Objects;
 import org.junit.Test;
 import pl.org.jdd.either.exception.NotValuableSouvenirException;
 import pl.org.jdd.legacy.stub.Location;
@@ -18,15 +17,20 @@ public class JewelleryHandlerTest {
 
   @Test
   public void topazIsNotValuableSouvenir() throws Exception {
+    Either<? extends Throwable, Object> expectedEither = Either
+        .left(new NotValuableSouvenirException("Not valid jewellery."));
+
     Either<? extends Throwable, Location> either = handler.handleSouvenir(new Jewellery("topaz"));
 
-    assert either.getLeft() instanceof NotValuableSouvenirException;
+    assert either.equals(expectedEither);
   }
 
   @Test
-  public void diamondsArePackedInBlackHole() throws Exception {
-    Either<? extends Throwable, Location> either = handler.handleSouvenir(new Jewellery("diamonds"));
+  public void silverIsPackedInSafe() throws Exception {
+    Either<Object, Location> expectedEither = Either.right(new Location("safe behind the picture"));
 
-    assert Objects.equals("Black hole", either.get().getDirection());
+    Either<? extends Throwable, Location> either = handler.handleSouvenir(new Jewellery("silver"));
+
+    assert either.equals(expectedEither);
   }
 }

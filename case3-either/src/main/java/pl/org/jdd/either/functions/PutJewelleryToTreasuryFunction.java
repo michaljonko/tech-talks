@@ -11,7 +11,8 @@ import pl.org.jdd.legacy.stub.jewellery.Jewellery;
 import pl.org.jdd.legacy.stub.jewellery.JewelleryPacker;
 
 @Slf4j
-public class PutJewelleryToTreasuryFunction implements Function1<Jewellery, Either<? extends Throwable, Location>> {
+public final class PutJewelleryToTreasuryFunction implements
+    Function1<Jewellery, Either<? extends Throwable, Location>> {
 
   private final JewelleryPacker packer;
   private final Treasury treasury;

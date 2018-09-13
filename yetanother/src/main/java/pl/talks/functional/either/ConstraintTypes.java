@@ -6,7 +6,8 @@ package pl.talks.functional.either;
 public enum ConstraintTypes {
 
   CANT_FIND_CONFIG_FILE(100, "Cannot find config file"),
-  EXTERNAL_SYSTEM_X_CONNECTION_PROBLEM(101, "Connection problem with connection to 'System X'. Response code: {}, Response message: {}");
+  EXTERNAL_SYSTEM_X_CONNECTION_PROBLEM(101,
+      "Connection problem with connection to 'System X'. Response code: {}, Response message: {}");
 
   private int errorCode;
   private String messageTemplate;

@@ -10,7 +10,7 @@ import pl.org.jdd.legacy.stub.jewellery.Jewellery;
 import pl.org.jdd.legacy.stub.jewellery.JewelleryValidator;
 
 @Slf4j
-public class ValidateJewelleryFunction implements Function1<Jewellery, Either<? extends Throwable, Jewellery>> {
+public final class ValidateJewelleryFunction implements Function1<Jewellery, Either<? extends Throwable, Jewellery>> {
 
   private final MeterRegistry meterRegistry;
   private final JewelleryValidator validator;

@@ -38,8 +38,8 @@ public final class JewelleryHandler implements Handler<Jewellery> {
   public void handleSouvenir(Jewellery jewellery) {
     if (validator.isValid(jewellery)) {
       meterRegistry.counter("jewellery.counter").increment();
-      SouvenirPackage requestMessage = packer.pack(jewellery);
-      treasury.put(requestMessage);
+      SouvenirPackage souvenirPackage = packer.pack(jewellery);
+      treasury.put(souvenirPackage);
     } else {
       log.info("Invalid Jewellery");
       meterRegistry.counter("jewellery.invalid.counter").increment();

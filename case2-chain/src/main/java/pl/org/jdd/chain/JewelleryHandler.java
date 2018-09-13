@@ -4,9 +4,6 @@ import io.vavr.Function1;
 import io.vavr.control.Option;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import pl.org.jdd.chain.functions.PutJewelleryToTreasuryFunction;
-import pl.org.jdd.chain.functions.ReportJewelleryFunction;
-import pl.org.jdd.chain.functions.ValidateJewelleryFunction;
 import pl.org.jdd.chain.tool.ChainInvoker;
 import pl.org.jdd.legacy.stub.Location;
 import pl.org.jdd.legacy.stub.jewellery.Jewellery;
@@ -20,9 +17,9 @@ public final class JewelleryHandler implements Handler<Jewellery, Location> {
   private final Function1<Option<Jewellery>, Option<Location>> putToTreasuryFunction;
 
   public JewelleryHandler(
-      @NonNull ValidateJewelleryFunction validateFunction,
-      @NonNull PutJewelleryToTreasuryFunction putToTreasuryFunction,
-      @NonNull ReportJewelleryFunction reportFunction) {
+      @NonNull Function1<Jewellery, Option<Jewellery>> validateFunction,
+      @NonNull Function1<Option<Jewellery>, Option<Jewellery>> reportFunction,
+      @NonNull Function1<Option<Jewellery>, Option<Location>> putToTreasuryFunction) {
     this.validateFunction = validateFunction;
     this.reportFunction = reportFunction;
     this.putToTreasuryFunction = putToTreasuryFunction;

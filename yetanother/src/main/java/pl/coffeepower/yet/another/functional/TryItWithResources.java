@@ -65,7 +65,8 @@ final class TryItWithResources {
   }
 
   @SuppressWarnings("unchecked")
-  static Either<? extends Throwable, Integer> wordFrequencyInFirstTenLinesOfReaderWithTryAndEither(@NonNull Reader reader,
+  static Either<? extends Throwable, Integer> wordFrequencyInFirstTenLinesOfReaderWithTryAndEither(
+      @NonNull Reader reader,
       @NonNull String word) {
     return Try
         .withResources(() -> new BufferedReader(reader))
@@ -77,7 +78,8 @@ final class TryItWithResources {
             Case(
                 $(allOf(
                     instanceOf(NoSuchElementException.class),
-                    (Predicate<Throwable>) throwable -> Objects.equals("reduceLeft on Nil", throwable.getLocalizedMessage()))),
+                    (Predicate<Throwable>) throwable -> Objects
+                        .equals("reduceLeft on Nil", throwable.getLocalizedMessage()))),
                 new NoSuchWordInText()))
         .onSuccess(counter -> Option.when(counter > 1, true).forEach(o -> logInfo(word)))
         .toEither();

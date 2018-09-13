@@ -18,7 +18,8 @@ public class FunctionHandler implements Handler {
   private final MeterRegistry meterRegistry;
   private final ResourceAValidator resourceAValidator;
 
-  public FunctionHandler(ResourceAConverter converter, ResourceFactoryClient resourceFactoryClient, MeterRegistry meterRegistry,
+  public FunctionHandler(ResourceAConverter converter, ResourceFactoryClient resourceFactoryClient,
+      MeterRegistry meterRegistry,
       ResourceAValidator resourceAValidator) {
     this.converter = converter;
     this.resourceFactoryClient = resourceFactoryClient;
