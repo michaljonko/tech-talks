@@ -15,7 +15,7 @@ import spock.lang.Unroll
 class JewelleryHandlerSpec extends Specification {
 
     @Unroll
-    def "for #jewellery handler returns #expectedEither"() {
+    def "for #jewellery Handler returns #expectedEither"() {
         setup:
         def validator = new JewelleryValidator()
         def packer = new JewelleryPacker()
