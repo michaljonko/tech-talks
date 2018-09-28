@@ -12,18 +12,19 @@ import pl.org.jdd.legacy.stub.jewellery.JewelleryValidator;
 public final class ValidateJewelleryFunction implements Function1<Jewellery, Option<Jewellery>> {
 
   private final MeterRegistry meterRegistry;
-  private final JewelleryValidator diamondValidator;
+  private final JewelleryValidator validator;
 
   public ValidateJewelleryFunction(
-      @NonNull JewelleryValidator diamondValidator,
+      @NonNull JewelleryValidator validator,
       @NonNull MeterRegistry meterRegistry) {
+    this.validator = validator;
     this.meterRegistry = meterRegistry;
-    this.diamondValidator = diamondValidator;
   }
 
   @Override
   public Option<Jewellery> apply(Jewellery jewellery) {
-    if (diamondValidator.isValid(jewellery)) {
+    if (validator.isValid(jewellery)) {
+      log.info("Valid Jewellery: {}", jewellery);
       return Option.of(jewellery);
     } else {
       log.info("Invalid Jewellery: {}", jewellery);

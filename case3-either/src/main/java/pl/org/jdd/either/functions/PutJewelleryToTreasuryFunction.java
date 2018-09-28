@@ -11,8 +11,7 @@ import pl.org.jdd.legacy.stub.jewellery.Jewellery;
 import pl.org.jdd.legacy.stub.jewellery.JewelleryPacker;
 
 @Slf4j
-public final class PutJewelleryToTreasuryFunction implements
-    Function1<Jewellery, Either<? extends Throwable, Location>> {
+public final class PutJewelleryToTreasuryFunction implements Function1<Jewellery, Either<? extends Throwable, Location>> {
 
   private final JewelleryPacker packer;
   private final Treasury treasury;
@@ -26,8 +25,13 @@ public final class PutJewelleryToTreasuryFunction implements
 
   @Override
   public Either<? extends Throwable, Location> apply(Jewellery jewellery) {
-    log.info("Pack & put to treasury.");
-    SouvenirPackage jewelleryPackage = packer.pack(jewellery);
-    return Either.right(treasury.put(jewelleryPackage));
+    try {
+      log.info("Pack & put to treasury: {}", jewellery);
+      SouvenirPackage jewelleryPackage = packer.pack(jewellery);
+      return Either.right(treasury.put(jewelleryPackage));
+    } catch (Throwable throwable) {
+      log.error("Something went wrong during packing.", throwable);
+      return Either.left(throwable);
+    }
   }
 }

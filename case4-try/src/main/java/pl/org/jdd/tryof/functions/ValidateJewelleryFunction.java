@@ -9,7 +9,7 @@ import pl.org.jdd.legacy.stub.jewellery.Jewellery;
 import pl.org.jdd.legacy.stub.jewellery.JewelleryValidator;
 
 @Slf4j
-public class ValidateJewelleryFunction implements Function1<Jewellery, Jewellery> {
+public final class ValidateJewelleryFunction implements Function1<Jewellery, Jewellery> {
 
   private final MeterRegistry meterRegistry;
   private final JewelleryValidator validator;
@@ -17,17 +17,17 @@ public class ValidateJewelleryFunction implements Function1<Jewellery, Jewellery
   public ValidateJewelleryFunction(
       @NonNull JewelleryValidator validator,
       @NonNull MeterRegistry meterRegistry) {
-    this.meterRegistry = meterRegistry;
     this.validator = validator;
+    this.meterRegistry = meterRegistry;
   }
 
   @Override
   public Jewellery apply(Jewellery jewellery) {
     if (validator.isValid(jewellery)) {
-      log.info("Valid Jewellery.");
+      log.info("Valid Jewellery: {}", jewellery);
       return jewellery;
     } else {
-      log.info("Invalid Jewellery.");
+      log.info("Invalid Jewellery: {}", jewellery);
       meterRegistry.counter("jewellery.invalid.counter").increment();
       throw new NotValuableSouvenirException("Not valid jewellery.");
     }

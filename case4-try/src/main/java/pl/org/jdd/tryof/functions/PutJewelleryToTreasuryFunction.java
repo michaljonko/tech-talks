@@ -10,7 +10,7 @@ import pl.org.jdd.legacy.stub.jewellery.Jewellery;
 import pl.org.jdd.legacy.stub.jewellery.JewelleryPacker;
 
 @Slf4j
-public class PutJewelleryToTreasuryFunction implements Function1<Jewellery, Location> {
+public final class PutJewelleryToTreasuryFunction implements Function1<Jewellery, Location> {
 
   private final JewelleryPacker packer;
   private final Treasury treasury;
@@ -24,7 +24,7 @@ public class PutJewelleryToTreasuryFunction implements Function1<Jewellery, Loca
 
   @Override
   public Location apply(Jewellery jewellery) {
-    log.info("Pack & put to treasury.");
+    log.info("Pack & put to treasury: {}", jewellery);
     SouvenirPackage jewelleryPackage = packer.pack(jewellery);
     return treasury.put(jewelleryPackage);
   }

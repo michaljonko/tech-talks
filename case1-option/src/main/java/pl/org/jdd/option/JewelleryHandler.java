@@ -41,7 +41,7 @@ public final class JewelleryHandler implements Handler<Jewellery, Location> {
         .peek(j -> log.info("Handling {} with Option solution", j))
         .filter(validator::isValid)
         .onEmpty(() -> {
-          log.info("Invalid Jewellery.");
+          log.info("Invalid Jewellery: {}", jewellery);
           meterRegistry.counter("jewellery.invalid.counter").increment();
         })
         .peek(j -> meterRegistry.counter("jewellery.counter").increment())

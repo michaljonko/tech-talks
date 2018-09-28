@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import pl.org.jdd.legacy.stub.jewellery.Jewellery;
 
 @Slf4j
-public class ReportJewelleryConsumer implements Consumer<Jewellery> {
+public final class ReportJewelleryConsumer implements Consumer<Jewellery> {
 
   private final MeterRegistry meterRegistry;
 
@@ -17,7 +17,7 @@ public class ReportJewelleryConsumer implements Consumer<Jewellery> {
 
   @Override
   public void accept(Jewellery jewellery) {
-    log.info("Report new jewellery.");
+    log.info("Report new jewellery: {}", jewellery);
     meterRegistry.counter("jewellery.counter").increment();
   }
 }
