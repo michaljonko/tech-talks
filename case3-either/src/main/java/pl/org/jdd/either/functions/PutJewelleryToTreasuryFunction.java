@@ -26,7 +26,6 @@ public final class PutJewelleryToTreasuryFunction implements Function1<Jewellery
   @Override
   public Either<? extends Throwable, Location> apply(Jewellery jewellery) {
     try {
-      log.info("Pack & put to treasury: {}", jewellery);
       SouvenirPackage jewelleryPackage = packer.pack(jewellery);
       return Either.right(treasury.put(jewelleryPackage));
     } catch (Throwable throwable) {

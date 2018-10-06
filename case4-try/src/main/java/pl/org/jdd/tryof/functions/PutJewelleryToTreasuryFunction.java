@@ -24,7 +24,6 @@ public final class PutJewelleryToTreasuryFunction implements Function1<Jewellery
 
   @Override
   public Location apply(Jewellery jewellery) {
-    log.info("Pack & put to treasury: {}", jewellery);
     SouvenirPackage jewelleryPackage = packer.pack(jewellery);
     return treasury.put(jewelleryPackage);
   }

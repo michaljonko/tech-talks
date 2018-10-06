@@ -19,7 +19,6 @@ public final class ReportJewelleryFunction implements Function1<Jewellery, Eithe
   @Override
   public Either<? extends Throwable, Jewellery> apply(Jewellery jewellery) {
     try {
-      log.info("Report new jewellery: {}", jewellery);
       meterRegistry.counter("jewellery.counter").increment();
       return Either.right(jewellery);
     } catch (Throwable throwable) {

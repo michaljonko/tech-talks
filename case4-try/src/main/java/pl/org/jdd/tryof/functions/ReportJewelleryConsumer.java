@@ -17,7 +17,6 @@ public final class ReportJewelleryConsumer implements Consumer<Jewellery> {
 
   @Override
   public void accept(Jewellery jewellery) {
-    log.info("Report new jewellery: {}", jewellery);
     meterRegistry.counter("jewellery.counter").increment();
   }
 }
